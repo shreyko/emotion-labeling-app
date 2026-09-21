@@ -1,0 +1,6 @@
+streamlit
+pandas
+pyarrow
+fsspec
+huggingface_hub
+gspread
