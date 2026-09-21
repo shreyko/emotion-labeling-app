@@ -18,3 +18,7 @@ __pycache__/
 # OS Files
 .DS_Store
 Thumbs.db
+
+# Assignment Submissions
+A1-1_Reflections.md
+*.pdf

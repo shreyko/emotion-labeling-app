@@ -71,7 +71,8 @@ def login_signup_page():
                         st.rerun()
                         return
                 
-                st.session_state.page = "labeling"
+                # Route to tutorial first instead of directly to labeling
+                st.session_state.page = "tutorial"
                 st.rerun()
             else:
                 st.error("Invalid email or password.")
@@ -98,10 +99,56 @@ def login_signup_page():
             else:
                 st.error("Please fill in all fields.")
 
+def tutorial_page():
+    st.title("Emotion Labeling Task")
+    st.write("### Step 1: Read the Tutorial")
+    st.markdown("""
+    Before you begin, please read these guidelines on how to accurately label emotions in this dataset.
+    
+    When reading a tweet, look for keywords and context clues that reveal the author's primary feeling. Because these are raw tweets from real people, there may be typos, slang, or poor grammar!
+    
+    *   **Anger**: Look for frustration, rage, or annoyance. 
+        *   *Example:* "i am so annoyed with this traffic right now"
+    *   **Fear**: Look for panic, anxiety, or dread. 
+        *   *Example:* "i feel terrified of what might happen tomorrow"
+    *   **Joy**: Look for happiness, excitement, or relief. 
+        *   *Example:* "i feel so happy and bright today"
+    *   **Love**: Look for deep affection, connection, or fondness. 
+        *   *Example:* "i cherish every moment we spend together"
+    *   **Sadness**: Look for grief, loss, loneliness, or depression. 
+        *   *Example:* "i am heartbroken and devastated"
+    *   **Surprise**: Look for shock, astonishment, or being caught off guard. 
+        *   *Example:* "i was totally caught off guard by that question"
+    """)
+    st.divider()
+    if st.button("I understand the instructions. Let's begin the task!"):
+        st.session_state.page = "labeling"
+        st.rerun()
+
 def labeling_page():
     st.title("Emotion Labeling Task")
-    st.write("### Instructions")
+    st.write("### Step 2: Label the Tweets")
     st.write("Please read each tweet below carefully. Select the emotion that best represents the feeling expressed in the text. You have been assigned 5 tweets to label.")
+    
+    with st.expander("View Tutorial & Examples (Click to expand)"):
+        st.markdown("""
+        **How to Label Emotions**
+        When reading a tweet, look for keywords and context clues that reveal the author's primary feeling. Because these are raw tweets from real people, there may be typos, slang, or poor grammar!
+        
+        *   **Anger**: Look for frustration, rage, or annoyance. 
+            *   *Example:* "i am so annoyed with this traffic right now"
+        *   **Fear**: Look for panic, anxiety, or dread. 
+            *   *Example:* "i feel terrified of what might happen tomorrow"
+        *   **Joy**: Look for happiness, excitement, or relief. 
+            *   *Example:* "i feel so happy and bright today"
+        *   **Love**: Look for deep affection, connection, or fondness. 
+            *   *Example:* "i cherish every moment we spend together"
+        *   **Sadness**: Look for grief, loss, loneliness, or depression. 
+            *   *Example:* "i am heartbroken and devastated"
+        *   **Surprise**: Look for shock, astonishment, or being caught off guard. 
+            *   *Example:* "i was totally caught off guard by that question"
+        """)
+        
     st.divider()
 
     tweets_df = load_tweets()
@@ -150,7 +197,6 @@ def labeling_page():
 def thanks_page():
     st.title("Task Complete!")
     st.success("Thank you for your time. Your responses have been successfully recorded in our database.")
-    st.balloons()
     st.write("You may now close this window, or log out.")
     
     if st.button("Log Out"):
@@ -170,6 +216,8 @@ def already_completed_page():
 
 if st.session_state.page == "auth":
     login_signup_page()
+elif st.session_state.page == "tutorial":
+    tutorial_page()
 elif st.session_state.page == "labeling":
     labeling_page()
 elif st.session_state.page == "thanks":
