@@ -4,7 +4,7 @@ This repository contains the code for an academic data labeling task focused on 
 
 ## Live Demo
 
-If you would like to see the application in action and participate in the labeling task, please head over to the live web interface here: **[[Insert Your Streamlit Link Here]](https://emotion-labeling-app-j8dlzfebhsgoorvyph2qv2.streamlit.app/)**
+If you would like to see the application in action and participate in the labeling task, please head over to the live web interface here: **(https://emotion-labeling-app-j8dlzfebhsgoorvyph2qv2.streamlit.app/)**
 
 ## Architecture and Backend
 
